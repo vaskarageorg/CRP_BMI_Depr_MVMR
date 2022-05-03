@@ -3,7 +3,7 @@ library(GRAPPLE)
 grapple_coll = function(X1,X2,G1,G2,Y){
 #Collider Correction
 XGdata2 = data.frame(X1, G1,G2)             
-FIT2 = summary(lm(XGdata2))             # estimated linear association
+FIT2 = summary(lm(XGdata2))  # estimated linear association, Step 2 in Appendix/6.Applying Collider-Correction to MVMR
 BetaX1G = FIT2$coef[-1,1]; seBetaX1G = FIT2$coef[-1,2] 
 ########################
 YXGdata          = data.frame(Y, X1,X2,G1,G2)
@@ -26,9 +26,9 @@ data_GR1 = data.frame(gamma_exp1 = BetaX1G, gamma_exp2 = BetaX2G,
 cordf21=data.frame(X1, X2, Y); cordf21 = cordf21[complete.cases(cordf21),]
 cor.mat = cor(cordf21); cor.mat[3,c(1,2)]=0; cor.mat[c(1,2),3]=0
 
-Fit= grappleRobustEst(data = data_GR1,cor.mat = cor.mat,plot.it = F)
-betaestX1 = betastarX1 + Fit$beta.hat[1]; sebetaestX1 = sqrt(se.betastarX1^2 + diag(Fit$beta.var)[1])
-betaestX2 = betastarX2 + Fit$beta.hat[2]; sebetaestX2 = sqrt(se.betastarX2^2 + diag(Fit$beta.var)[2])
+Fit= grappleRobustEst(data = data_GR1,cor.mat = cor.mat,plot.it = F) # Step 3 in Appendix/6.Applying Collider-Correction to MVMR
+betaestX1 = betastarX1 + Fit$beta.hat[1]; sebetaestX1 = sqrt(se.betastarX1^2 + diag(Fit$beta.var)[1]) # Step 4 in Appendix/6.Applying Collider-Correction to MVMR
+betaestX2 = betastarX2 + Fit$beta.hat[2]; sebetaestX2 = sqrt(se.betastarX2^2 + diag(Fit$beta.var)[2]) # Step 4 in Appendix/6.Applying Collider-Correction to MVMR
 
 ##get conditional instrument strength
 #gencov2 = list(); Gall = data.frame(G1,G2); Xall = data.frame(X1,X2)
