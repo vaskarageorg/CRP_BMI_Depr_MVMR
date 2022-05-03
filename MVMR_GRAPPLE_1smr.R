@@ -9,8 +9,9 @@ BetaX1G = FIT2$coef[-1,1]; seBetaX1G = FIT2$coef[-1,2]
 YXGdata          = data.frame(Y, X1,X2,G1,G2)
 FIT4             = summary(lm(YXGdata))                  # estimated associations
 alphahatstar = FIT4$coef[-c(1,2,3),1]; se.alphahatstar  = FIT4$coef[-c(1,2,3),2]
-betastarX1 = FIT4$coef[2,1]; se.betastarX1 = FIT4$coef[2,2] 
-betastarX2 = FIT4$coef[3,1]; se.betastarX2 = FIT4$coef[3,2] 
+betastarX1 = FIT4$coef[2,1]; se.betastarX1 = FIT4$coef[2,2] #Step 1 in Appendix/6.Applying Collider-Correction to MVMR
+betastarX2 = FIT4$coef[3,1]; se.betastarX2 = FIT4$coef[3,2] #Step 1 in Appendix/6.Applying Collider-Correction to MVMR
+
 
 #
 X2Gdata2 = data.frame(X2, G1,G2)             
